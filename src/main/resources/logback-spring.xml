@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration>
+<configuration>
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+			<layout class="ch.qos.logback.classic.PatternLayout">
+				<pattern>%d{ISO8601} %-5level [%thread] \(%file:%line\)\(%class:%method\) - %msg%n</pattern>
+			</layout>
+		</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/ops.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{ISO8601} ${OPS_POD_IP} %-5level [%thread] \(%file:%line\) - %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/ops.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{ISO8601} ${OPS_POD_IP} %-5level [%thread] \(%file:%line\) - %msg%n</pattern>
+		</layout>
+	</appender>
+	<springProfile name="default, test, local">
+		<root level="DEBUG">
+			<appender-ref ref="CONSOLE"/>
+		</root>
+		<logger name="org.kun.vaadin" additivity="false">
+			<level value="DEBUG"/>
+			<appender-ref ref="CONSOLE"/>
+		</logger>
+	</springProfile>
+
+	<springProfile name="dev, beta">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE"/>
+
+			<appender-ref ref="FILE"/>
+		</root>
+		<logger name="org.kun.vaadin" additivity="false">
+			<level value="DEBUG"/>
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</logger>
+	</springProfile>
+
+	<springProfile name="qa, stg, stgrc, pre, prod, release">
+		<root level="INFO">
+			<appender-ref ref="CONSOLE"/>
+			<appender-ref ref="FILE"/>
+		</root>
+	</springProfile>
+</configuration>

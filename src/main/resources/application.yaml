@@ -1,0 +1,25 @@
+info:
+  build:
+    version: "1.0.0"
+spring:
+  datasource:
+    platform: oracle
+    initialization-mode: always
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+    username: sa
+    password: sa
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    root: INFO
+
+server:
+  servlet:
+    context-path: /
+
+management:
+  endpoint:
+    health:
+      show-details: "ALWAYS"
+

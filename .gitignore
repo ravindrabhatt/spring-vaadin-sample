@@ -1,0 +1,59 @@
+# Testing
+.driver
+.gatling
+error-screenshots
+selenium_standalone_zips
+webdriver/
+
+# macOs
+.DS_Store
+
+# Frontend
+/build-tools/bin/
+/build-tools/etc/
+/build-tools/lib/
+/build-tools/node/
+/build-tools/node_modules/
+/build-tools/yarn.lock
+
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+### Node ###
+package-lock.json
+package.json
+webpack.config.js
+webpack.generated.js
+node_modules
+node
+LICENSE
